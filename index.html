@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 결혼합니다</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* 1. 말풍선과 똑같은 연보라색(`#C8B9E6`)으로 전체 통일! */
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background-color: #B29AD6; 
+            font-family: 'sans-serif'; 
+            color: #333; 
+        }
+        .container { 
+            max-width: 480px; 
+            margin: 0 auto; 
+            background-color: #B29AD6; /* 여기도 같은 색 */
+            overflow: hidden; 
+        }
+
+        .image-section img { width: 100%; display: block; }
+        .image-section div { margin-bottom: 126px; } 
+
+        .info-section { 
+            background-color: #B29AD6; /* 여기도 같은 색 */
+            padding: 60px 24px;
+            text-align: center;
+            color: #444;
+        }
+
+        .title { 
+            font-size: 22px; 
+            font-weight: bold; 
+            color: #5C4B9B; /* 텍스트는 보라색 계열로 진하게 */
+            margin-bottom: 40px; 
+            border-bottom: 2px solid #8E7CC3; 
+            padding-bottom: 8px;
+            display: inline-block; 
+        }
+
+        .venue-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #333; }
+        .address { font-size: 15px; color: #555; margin-bottom: 30px; }
+
+        .transport-box {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.5); 
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .transport-item { margin-bottom: 20px; }
+        .transport-label { font-weight: bold; color: #5C4B9B; display: block; margin-bottom: 5px; font-size: 16px; }
+        .transport-desc { font-size: 14px; line-height: 1.6; color: #444; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="image-section">
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="01.png" alt="01"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="02.png" alt="02"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="03-04.png" alt="03-04"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="05.png" alt="05"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="06.png" alt="06"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="07.png" alt="07"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="08-09.png" alt="08-09"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="10.png" alt="10"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="11.png" alt="11"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="12.png" alt="12"></div>
+        <div data-aos="fade-up" data-aos-duration="1000"><img src="13.png" alt="13"></div>
+    </div>
+
+   <div class="info-section">
+    <div class="title" data-aos="fade-up">오시는 길</div>
+    <div data-aos="fade-up" data-aos-delay="100">
+        <div class="venue-name">서강대학교 대홍관</div>
+        <div class="address">서울특별시 마포구 백범로 35</div>
+    </div>
+    <div id="map" style="width:100%; height:250px; background:#fff; border-radius:15px; margin-bottom:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display:flex; align-items:center; justify-content:center; color:#999;" data-aos="fade-up">
+        지도가 들어올 자리입니다
+    </div>
+    <div class="transport-box" data-aos="fade-up">
+        <div class="transport-item">
+            <span class="transport-label">📍 지하철 이용 시</span>
+            <span class="transport-desc">
+                - 2호선 <b>신촌역</b> 6번 출구에서 도보 10분<br>
+                - 6호선 <b>대흥역</b> 1번 출구에서 도보 8분
+            </span>
+        </div>
+        <div class="transport-item">
+            <span class="transport-label">🚌 버스 이용 시</span>
+            <span class="transport-desc">
+                - 마포07, 마포10, 마포14<br>
+                - 110A, 110B, 163, 604, 740, 921
+            </span>
+        </div>
+        <div class="transport-item" style="margin-bottom:0;">
+            <span class="transport-label">🚗 주차 안내</span>
+            <span class="transport-desc">교내 주차장 이용 가능 (하객 2시간 무료)</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true, offset: 100 });
+</script>
+</body>
+</html>
