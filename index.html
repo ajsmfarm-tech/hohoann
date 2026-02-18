@@ -7,50 +7,201 @@
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        :root { --main-purple: #B29AD6; --info-bg: #FFFDD7; --text-main: #5A5828; --text-sub: rgba(90, 88, 40, 0.8); --point-green: #18882A; --line-green: #2F943B; }
-        body { margin: 0; padding: 0; background-color: var(--main-purple); font-family: 'Pretendard', sans-serif; word-break: keep-all; overflow-x: hidden; user-select: none; -webkit-tap-highlight-color: transparent; }
-        .container { max-width: 480px; margin: 0 auto; background-color: var(--main-purple); position: relative; }
-        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--main-purple); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 99999; transition: opacity 0.8s ease; }
-        .heart-loader { width: 50px; height: 50px; background-color: #fff; transform: rotate(-45deg); animation: heart-beat 1.2s infinite; position: relative; }
+        :root {
+            --main-purple: #B29AD6;
+            --info-bg: #FFFDD7;
+            --text-main: #5A5828;
+            --text-sub: rgba(90, 88, 40, 0.8);
+            --line-green: #18882A;
+            --point-green: #2F943B;
+        }
+
+        body { 
+            margin: 0; padding: 0; 
+            background-color: #ffffff; /* 웹 배경을 흰색으로 변경 */
+            font-family: 'Pretendard', sans-serif; 
+            word-break: keep-all;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            display: flex; /* 컨테이너 중앙 정렬을 위한 Flex 설정 */
+            justify-content: center;
+        }
+
+        .container { 
+            width: 100%;
+            max-width: 480px; /* 콘텐츠 최대 너비 480px 유지 */
+            background-color: var(--main-purple); /* 컨테이너 배경을 보라색으로 설정 */
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 컨테이너에 살짝 그림자 추가 */
+        }
+
+        /* --- 인트로 로딩 화면 --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--main-purple);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 99999; transition: opacity 0.8s ease;
+        }
+        .heart-loader {
+            width: 50px; height: 50px; background-color: #fff;
+            transform: rotate(-45deg); animation: heart-beat 1.2s infinite; position: relative;
+        }
         .heart-loader::before, .heart-loader::after { content: ""; width: 50px; height: 50px; background-color: #fff; border-radius: 50%; position: absolute; }
         .heart-loader::before { top: -25px; left: 0; }
         .heart-loader::after { left: 25px; top: 0; }
         @keyframes heart-beat { 0%, 100% { transform: rotate(-45deg) scale(1); } 20% { transform: rotate(-45deg) scale(1.2); } }
+
+        /* --- 이미지 섹션 --- */
         .image-section img { width: 100%; display: block; }
         .image-section div { margin-bottom: 68px; }
+
         .more-btn-wrap { text-align: center; margin-bottom: 80px; }
-        .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
-        .info-section { background-color: var(--info-bg); padding: 80px 24px; color: var(--text-main); }
+        .more-btn {
+            width: 90%; padding: 15px; background: transparent;
+            border: 1px solid var(--point-green); color: var(--point-green);
+            border-radius: 8px; font-size: 16px; cursor: pointer;
+        }
+
+        /* --- 정보 섹션 --- */
+        .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
+        .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
         .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; }
-        .account-section { padding: 60px 24px 100px; background-color: var(--info-bg); }
-        details { border: 1.05px solid var(--line-green); border-radius: 8.4px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
-        summary { padding: 15px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 400; }
+        .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 170%; margin-bottom: 40px; }
+        
+        .sub-section { margin-bottom: 30px; }
+        .sub-title { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+        .sub-content { font-size: 14px; color: var(--text-sub); line-height: 170%; }
+        hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
+
+        /* --- 계좌 섹션 --- */
+        .account-section { padding: 40px 21px 60px; background-color: var(--info-bg); }
+        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
+        
+        details { 
+            border: 1.05px solid var(--line-green); 
+            border-radius: 8.42px; 
+            margin-bottom: 15px; 
+            background: var(--info-bg); 
+            overflow: hidden; 
+        }
+        summary { 
+            padding: 15px; font-size: 16px; color: var(--line-green); 
+            cursor: pointer; list-style: none; display: flex; 
+            justify-content: space-between; align-items: center; font-weight: 500;
+        }
+        summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        
+        .account-list { padding: 10px 15px 20px; border-top: 1.05px solid rgba(24, 136, 42, 0.1); }
+        .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
+        .account-item:last-child { border-bottom: none; }
+        .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
+        .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
+        .copy-icon { cursor: pointer; opacity: 0.7; width: 20px; }
+
+        /* 하단 로고 영역 */
+        .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
+        .footer-logo img { width: 100%; max-width: 480px; }
+
+        /* 터치 효과 & 토스트 */
         .floating-heart { position: absolute; font-size: 28px; pointer-events: none; animation: float-up 1s ease-out forwards; z-index: 10000; }
-        @keyframes float-up { 0% { transform: translate(-50%, -50%) scale(1); opacity: 1; } 100% { transform: translate(-50%, -180%) scale(1.6); opacity: 0; } }
+        /* 이모지가 사라지지 않게 opacity: 0 제거 */
+        @keyframes float-up { 0% { transform: translate(-50%, -50%) scale(1); } 100% { transform: translate(-50%, -180%) scale(1.6); } }
         #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 100001; left: 50%; bottom: 30px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body>
-<div id="loader"><div class="heart-loader"></div><p style="color: white; margin-top: 50px; font-weight: 500;">두근두근 준비 중...</p></div>
+
+<div id="loader">
+    <div class="heart-loader"></div>
+    <p style="color: white; margin-top: 50px; font-weight: 500;">두근두근 준비 중...</p>
+</div>
+
 <div class="container">
     <div class="image-section">
-        <div data-aos="fade-up"><img src="01.png"></div><div data-aos="fade-up"><img src="02.png"></div><div data-aos="fade-up"><img src="03-04.png"></div><div data-aos="fade-up"><img src="05.png"></div><div data-aos="fade-up"><img src="06.png"></div><div data-aos="fade-up"><img src="07.png"></div><div data-aos="fade-up"><img src="08-09.png"></div><div data-aos="fade-up"><img src="10.png"></div><div data-aos="fade-up"><img src="11.png"></div><div data-aos="fade-up"><img src="12.png"></div><div data-aos="fade-up" style="margin-bottom:0;"><img src="13.png"></div>
+        <div data-aos="fade-up"><img src="01.png"></div>
+        <div data-aos="fade-up"><img src="02.png"></div>
+        <div data-aos="fade-up"><img src="03-04.png"></div>
+        <div data-aos="fade-up"><img src="05.png"></div>
+        <div data-aos="fade-up"><img src="06.png"></div>
+        <div data-aos="fade-up"><img src="07.png"></div>
+        <div data-aos="fade-up"><img src="08-09.png"></div>
+        <div data-aos="fade-up"><img src="10.png"></div>
+        <div data-aos="fade-up"><img src="11.png"></div>
+        <div data-aos="fade-up"><img src="12.png"></div>
+        <div data-aos="fade-up" style="margin-bottom:0;"><img src="13.png"></div>
     </div>
-    <div class="more-btn-wrap"><button class="more-btn">사진 더 보기</button></div>
+
+    <div class="more-btn-wrap" data-aos="fade-up">
+        <button class="more-btn">더 보기</button>
+    </div>
+
     <div class="info-section">
+        <div class="label-sm" data-aos="fade-up">오시는 길</div>
         <div class="venue-title" data-aos="fade-up">대홍관</div>
-        <div class="address-row" data-aos="fade-up" onclick="copyToClipboard('서울 서초구 청룡마을길 14')">서울 서초구 청룡마을길 14 : 두레가든 📋</div>
+        <div class="address-row" data-aos="fade-up" onclick="copyToClipboard('서울 서초구 청룡마을길 14')">
+            서울 서초구 청룡마을길 14 : 두레가든 📋
+        </div>
+        <div class="desc-sm" data-aos="fade-up">전용 주차장이 없어 공간이 협소할 수 있으니 가급적 대중교통 이용 부탁드립니다.</div>
         <hr>
-        <p>기타 안내 사항들...</p>
+        <div class="sub-section" data-aos="fade-up">
+            <div class="sub-title">인근 주차장</div>
+            <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
+        </div>
+        <div class="sub-section" data-aos="fade-up">
+            <div class="sub-title">지하철</div>
+            <div class="sub-content">청계산 입구역 2번 출구</div>
+        </div>
+        <div class="sub-section" data-aos="fade-up">
+            <div class="sub-title">지선버스</div>
+            <div class="sub-content">4432 청계산 입구역 정류장 하차</div>
+        </div>
+        <div class="sub-section" data-aos="fade-up">
+            <div class="sub-title">추가 안내</div>
+            <div class="sub-content">예식장 사정상 모든 축화 화환은 정중히 사양합니다.<br>마음만 감사히 받겠습니다.</div>
+        </div>
     </div>
+
     <div class="account-section">
-        <div class="section-title">마음 전하실 곳</div>
-        <details><summary>신부측 계좌정보</summary><div class="account-list">농협 351-0489-9023-73 <span onclick="copyToClipboard('351-0489-9023-73')">📋</span></div></details>
+        <div class="section-title" data-aos="fade-up">마음 전하실 곳</div>
+        
+        <details data-aos="fade-up">
+            <summary>신부측 마음 전하실 곳</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info"><div class="name">신부 박수현</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 김희정</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+            </div>
+        </details>
+
+        <details data-aos="fade-up">
+            <summary>신랑측 마음 전하실 곳</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info"><div class="name">신랑 황인검</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <div class="footer-logo">
+        <img src="13.png" alt="footer logo">
     </div>
 </div>
+
 <div id="toast">복사되었습니다.</div>
+
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     window.addEventListener('load', function() {
@@ -77,11 +228,12 @@
     function createHeart(x, y) {
         const h = document.createElement('span');
         h.className = 'floating-heart';
-        const infoTop = document.querySelector('.info-section').getBoundingClientRect().top + window.pageYOffset;
-        h.innerHTML = (y > infoTop) ? '💚' : '💜';
+        const info = document.querySelector('.info-section').getBoundingClientRect();
+        const top = info.top + window.pageYOffset;
+        h.innerHTML = (y > top) ? '💚' : '💜';
         h.style.left = x + 'px'; h.style.top = y + 'px';
         document.body.appendChild(h);
-        setTimeout(() => h.remove(), 1000);
+        // setTimeout(() => h.remove(), 1000); // 하트 삭제 코드 주석 처리
     }
 
     function copyToClipboard(t) {
