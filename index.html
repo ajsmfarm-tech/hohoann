@@ -6,53 +6,66 @@
     <title>우리 결혼합니다</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <style>
         :root {
             --main-purple: #B29AD6;
-            --info-bg: #FFFDD7;
-            --text-main: #5A5828;
+            --info-bg: #FFFDD7; /* 피그마 실측 */
+            --text-main: #5A5828; /* 피그마 실측 */
             --text-sub: rgba(90, 88, 40, 0.8);
-            --line-green: #18882A;
-            --point-green: #2F943B;
+            --line-green: #18882A; /* 피그마 실측 */
+            --point-green: #2F943B; /* 피그마 선택색 */
         }
 
         body { 
-            margin: 0; padding: 0; 
-            background-color: #ffffff; /* 웹 배경을 흰색으로 변경 */
-            font-family: 'Pretendard', sans-serif; 
-            word-break: keep-all;
-            overflow-x: hidden;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-            display: flex; /* 컨테이너 중앙 정렬을 위한 Flex 설정 */
-            justify-content: center;
+            margin: 0; padding: 0; background-color: #ffffff; 
+            font-family: 'Pretendard', sans-serif; word-break: keep-all;
+            overflow-x: hidden; user-select: none; -webkit-tap-highlight-color: transparent;
+            display: flex; justify-content: center;
         }
-
         .container { 
-            width: 100%;
-            max-width: 480px; /* 콘텐츠 최대 너비 480px 유지 */
-            background-color: var(--main-purple); /* 컨테이너 배경을 보라색으로 설정 */
-            position: relative;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 컨테이너에 살짝 그림자 추가 */
+            width: 100%; max-width: 480px; background-color: var(--main-purple); 
+            position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 인트로 로딩 화면 --- */
+        /* --- 인트로 로딩 --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--main-purple);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 99999; transition: opacity 0.8s ease;
+            z-index: 99999999; transition: opacity 0.8s ease;
         }
         .heart-loader {
-            width: 50px; height: 50px; background-color: #fff;
-            transform: rotate(-45deg); animation: heart-beat 1.2s infinite; position: relative;
+            width: 50px; height: 50px; background-color: #fff; transform: rotate(-45deg);
+            animation: heart-beat 1.2s infinite; position: relative;
         }
         .heart-loader::before, .heart-loader::after { content: ""; width: 50px; height: 50px; background-color: #fff; border-radius: 50%; position: absolute; }
         .heart-loader::before { top: -25px; left: 0; }
         .heart-loader::after { left: 25px; top: 0; }
         @keyframes heart-beat { 0%, 100% { transform: rotate(-45deg) scale(1); } 20% { transform: rotate(-45deg) scale(1.2); } }
 
-        /* --- 이미지 섹션 --- */
+        /* --- 갤러리 모달 --- */
+        #gallery-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #ffffff; z-index: 10000000;
+        }
+        .gallery-header {
+            height: 60px; display: flex; align-items: center; padding: 0 20px;
+            border-bottom: 1px solid #eee; background: #fff;
+        }
+        .back-btn { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; }
+        .header-title { margin-left: 10px; font-weight: 600; font-size: 18px; color: #333; }
+        .swiper { width: 100%; height: calc(100% - 60px); }
+        .swiper-slide { display: flex; justify-content: center; align-items: center; background: #fafafa; }
+        .swiper-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .swiper-pagination-fraction {
+            position: absolute; bottom: 40px; right: 20px; width: auto !important; left: auto !important;
+            background: rgba(0, 0, 0, 0.6); color: #fff; padding: 4px 14px;
+            border-radius: 20px; font-size: 13px; z-index: 10;
+        }
+
+        /* --- 이미지 섹션 (01-13 유지) --- */
         .image-section img { width: 100%; display: block; }
         .image-section div { margin-bottom: 68px; }
 
@@ -63,28 +76,26 @@
             border-radius: 8px; font-size: 16px; cursor: pointer;
         }
 
-        /* --- 정보 섹션 --- */
+        /* --- 정보 섹션 (스크린샷 기반 복구) --- */
         .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
         .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
         .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 400; }
-        .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 170%; margin-bottom: 40px; }
+        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
         
-        .sub-section { margin-bottom: 30px; }
-        .sub-title { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
-        .sub-content { font-size: 14px; color: var(--text-sub); line-height: 170%; }
+        .sub-section { margin-bottom: 35px; }
+        .sub-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
 
-        /* --- 계좌 섹션 --- */
+        /* --- 계좌 섹션 (스크린샷 기반 복구) --- */
         .account-section { padding: 40px 21px 60px; background-color: var(--info-bg); }
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
         
         details { 
-            border: 1.05px solid var(--line-green); 
-            border-radius: 8.42px; 
-            margin-bottom: 15px; 
-            background: var(--info-bg); 
-            overflow: hidden; 
+            border: 1.0526px solid var(--line-green); /* 피그마 실측 */
+            border-radius: 8.4211px; /* 피그마 실측 */
+            margin-bottom: 15px; background: var(--info-bg); overflow: hidden; 
         }
         summary { 
             padding: 15px; font-size: 16px; color: var(--line-green); 
@@ -94,32 +105,38 @@
         summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
         details[open] summary::after { transform: rotate(180deg); }
         
-        .account-list { padding: 10px 15px 20px; border-top: 1.05px solid rgba(24, 136, 42, 0.1); }
+        .account-list { padding: 10px 15px 20px; border-top: 1.0526px solid rgba(24, 136, 42, 0.1); }
         .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
         .account-item:last-child { border-bottom: none; }
         .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
         .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
         .copy-icon { cursor: pointer; opacity: 0.7; width: 20px; }
 
-        /* 하단 로고 영역 */
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
         /* 터치 효과 & 토스트 */
-        .floating-heart { position: absolute; font-size: 28px; pointer-events: none; animation: float-up 1s ease-out forwards; z-index: 10000; }
-        /* 이모지가 사라지지 않게 opacity: 0 제거 */
-        @keyframes float-up { 0% { transform: translate(-50%, -50%) scale(1); } 100% { transform: translate(-50%, -180%) scale(1.6); } }
-        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 100001; left: 50%; bottom: 30px; transform: translateX(-50%); }
+        .floating-heart { position: absolute; font-size: 28px; z-index: 10000005; cursor: pointer; transition: transform 0.1s ease-out; }
+        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 30px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
-        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
     </style>
 </head>
 <body>
 
-<div id="loader">
-    <div class="heart-loader"></div>
-    <p style="color: white; margin-top: 50px; font-weight: 500;">두근두근 준비 중...</p>
+<div id="loader"><div class="heart-loader"></div><p style="color: white; margin-top: 50px; font-weight: 500;">두근두근 준비 중...</p></div>
+
+<div id="gallery-modal">
+    <div class="gallery-header">
+        <button class="back-btn" onclick="closeGallery()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+        <span class="header-title">우리의 순간들</span>
+    </div>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="gallery_01.jpg"></div>
+            <div class="swiper-slide"><img src="gallery_02.jpg"></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
 </div>
 
 <div class="container">
@@ -138,7 +155,7 @@
     </div>
 
     <div class="more-btn-wrap" data-aos="fade-up">
-        <button class="more-btn">더 보기</button>
+        <button class="more-btn" onclick="openGallery()">사진 더 보기</button>
     </div>
 
     <div class="info-section">
@@ -148,7 +165,9 @@
             서울 서초구 청룡마을길 14 : 두레가든 📋
         </div>
         <div class="desc-sm" data-aos="fade-up">전용 주차장이 없어 공간이 협소할 수 있으니 가급적 대중교통 이용 부탁드립니다.</div>
+        
         <hr>
+
         <div class="sub-section" data-aos="fade-up">
             <div class="sub-title">인근 주차장</div>
             <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
@@ -181,6 +200,10 @@
                     <div class="account-info"><div class="name">어머니 김희정</div><div class="number">농협 351-0489-9023-73</div></div>
                     <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
                 </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 박창희</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
             </div>
         </details>
 
@@ -191,18 +214,23 @@
                     <div class="account-info"><div class="name">신랑 황인검</div><div class="number">농협 351-0489-9023-73</div></div>
                     <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
                 </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 김현정</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
             </div>
         </details>
     </div>
 
     <div class="footer-logo">
-        <img src="13.png" alt="footer logo">
+        <img src="footer_graphic.png" alt="footer graphic">
     </div>
 </div>
 
 <div id="toast">복사되었습니다.</div>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
     window.addEventListener('load', function() {
         const loader = document.getElementById('loader');
@@ -215,25 +243,37 @@
         }, 2500); 
     });
 
+    let swiper;
+    function openGallery() {
+        document.getElementById('gallery-modal').style.display = 'block';
+        document.body.style.overflow = 'hidden';
+        if (!swiper) {
+            swiper = new Swiper(".mySwiper", {
+                pagination: { el: ".swiper-pagination", type: "fraction" },
+                grabCursor: true
+            });
+        }
+    }
+    function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
     let lastX = 0, lastY = 0;
-    document.addEventListener('click', e => createHeart(e.pageX, e.pageY));
+    document.addEventListener('click', e => {
+        if (e.target.classList.contains('floating-heart')) { e.target.remove(); } 
+        else { createHeart(e.pageX, e.pageY); }
+    });
     document.addEventListener('touchmove', e => {
         const t = e.touches[0];
-        if (Math.hypot(t.pageX - lastX, t.pageY - lastY) > 30) {
-            createHeart(t.pageX, t.pageY);
-            lastX = t.pageX; lastY = t.pageY;
-        }
+        if (Math.hypot(t.pageX - lastX, t.pageY - lastY) > 100) { createHeart(t.pageX, t.pageY); lastX = t.pageX; lastY = t.pageY; }
     }, { passive: true });
 
     function createHeart(x, y) {
         const h = document.createElement('span');
         h.className = 'floating-heart';
         const info = document.querySelector('.info-section').getBoundingClientRect();
-        const top = info.top + window.pageYOffset;
-        h.innerHTML = (y > top) ? '💚' : '💜';
+        h.innerHTML = (y > info.top + window.pageYOffset) ? '💚' : '💜';
         h.style.left = x + 'px'; h.style.top = y + 'px';
+        h.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
         document.body.appendChild(h);
-        // setTimeout(() => h.remove(), 1000); // 하트 삭제 코드 주석 처리
     }
 
     function copyToClipboard(t) {
