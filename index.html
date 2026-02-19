@@ -42,29 +42,23 @@
         .heart-loader::after { left: 25px; top: 0; }
         @keyframes heart-beat { 0%, 100% { transform: rotate(-45deg) scale(1); } 20% { transform: rotate(-45deg) scale(1.2); } }
 
-        /* --- 2. 갤러리 팝업 모달 (수정됨) --- */
+        /* --- 2. 갤러리 팝업 모달 --- */
         #gallery-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* 배경 어둡게 */
-            z-index: 10000000;
-            align-items: center; justify-content: center; /* 중앙 정렬 */
+            background-color: rgba(0, 0, 0, 0.7); z-index: 10000000;
+            align-items: center; justify-content: center;
         }
         .gallery-content {
             width: 90%; max-width: 430px; height: 80%;
-            background: #fff; border-radius: 20px; /* 둥근 테두리 */
+            background: #fff; border-radius: 20px;
             overflow: hidden; display: flex; flex-direction: column;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            animation: popup-open 0.3s ease-out; /* 팝업 애니메이션 */
+            animation: popup-open 0.3s ease-out;
         }
-        @keyframes popup-open {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
+        @keyframes popup-open { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .gallery-header { height: 60px; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #eee; background: #fff; }
         .back-btn { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; }
         .header-title { margin-left: 10px; font-weight: 600; font-size: 18px; color: #333; }
-        
         .swiper { width: 100%; height: calc(100% - 60px); }
         .swiper-slide { display: flex; justify-content: center; align-items: center; background: #fafafa; }
         .swiper-slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
@@ -77,18 +71,34 @@
         /* --- 3. 이미지 섹션 (01-13 고정) --- */
         .image-section img { width: 100%; display: block; }
         .image-section div { margin-bottom: 68px; }
-
         .more-btn-wrap { text-align: center; margin-bottom: 80px; }
         .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
 
-        /* --- 4. 정보 및 계좌 섹션 (고정) --- */
+        /* --- 4. 오시는 길 (구조 복구) --- */
         .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
+        .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
         .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: 400; }
+        .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
+        .sub-section { margin-bottom: 35px; }
+        .sub-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
+        .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
+
+        /* --- 5. 마음 전하실 곳 (구조 복구) --- */
         .account-section { padding: 40px 21px 60px; background-color: var(--info-bg); }
-        details { border: 1.0526px solid var(--line-green); border-radius: 8.4211px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
+        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
+        details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
         summary { padding: 15px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+        summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
+        details[open] summary::after { transform: rotate(180deg); }
+        .account-list { padding: 10px 15px 20px; border-top: 1.05px solid rgba(24, 136, 42, 0.1); }
+        .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
+        .account-item:last-child { border-bottom: none; }
+        .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
+        .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
+        .copy-icon { cursor: pointer; opacity: 0.7; width: 20px; }
+
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
@@ -105,16 +115,13 @@
 <div id="gallery-modal" onclick="closeGalleryByOutside(event)">
     <div class="gallery-content">
         <div class="gallery-header">
-            <button class="back-btn" onclick="closeGallery()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
+            <button class="back-btn" onclick="closeGallery()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
             <span class="header-title">우리의 순간들</span>
         </div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img src="gallery_01.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_02.jpg"></div>
-                <div class="swiper-slide"><img src="gallery_03.jpg"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -141,35 +148,69 @@
     </div>
 
     <div class="info-section">
-        <div class="venue-title">대홍관</div>
-        <div class="address-row" onclick="copyToClipboard('서울 서초구 청룡마을길 14')">서울 서초구 청룡마을길 14 : 두레가든 📋</div>
+        <div class="label-sm" data-aos="fade-up">오시는 길</div>
+        <div class="venue-title" data-aos="fade-up">대홍관</div>
+        <div class="address-row" data-aos="fade-up" onclick="copyToClipboard('서울 서초구 청룡마을길 14')">
+            서울 서초구 청룡마을길 14 : 두레가든 📋
+        </div>
+        <div class="desc-sm" data-aos="fade-up">전용 주차장이 없어 공간이 협소할 수 있으니<br>가급적 대중교통 이용 부탁드립니다.</div>
+        
         <hr>
-        <div class="sub-section">
+
+        <div class="sub-section" data-aos="fade-up">
             <div class="sub-title">인근 주차장</div>
             <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
         </div>
-        <div class="sub-section">
+        <div class="sub-section" data-aos="fade-up">
             <div class="sub-title">지하철</div>
             <div class="sub-content">청계산 입구역 2번 출구</div>
         </div>
-        <div class="sub-section">
+        <div class="sub-section" data-aos="fade-up">
+            <div class="sub-title">지선버스</div>
+            <div class="sub-content">4432 청계산 입구역 정류장 하차</div>
+        </div>
+        <div class="sub-section" data-aos="fade-up">
             <div class="sub-title">추가 안내</div>
             <div class="sub-content">예식장 사정상 모든 축화 화환은 정중히 사양합니다.<br>마음만 감사히 받겠습니다.</div>
         </div>
     </div>
 
     <div class="account-section">
-        <div class="section-title">마음 전하실 곳</div>
-        <details>
+        <div class="section-title" data-aos="fade-up">마음 전하실 곳</div>
+        
+        <details data-aos="fade-up">
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
-                    <div class="account-info"><div>신부 박수현</div><div>농협 351-0489-9023-73</div></div>
+                    <div class="account-info"><div class="name">신부 박수현</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 김희정</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 박창희</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+            </div>
+        </details>
+
+        <details data-aos="fade-up">
+            <summary>신랑측 마음 전하실 곳</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info"><div class="name">신랑 황인검</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
+                </div>
+                <div class="account-item">
+                    <div class="account-info"><div class="name">어머니 김현정</div><div class="number">농협 351-0489-9023-73</div></div>
                     <img src="https://cdn-icons-png.flaticon.com/512/1621/1621635.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')">
                 </div>
             </div>
         </details>
     </div>
+
     <div class="footer-logo"><img src="13.png" alt="footer logo"></div>
 </div>
 
@@ -191,25 +232,18 @@
 
     let swiper;
     function openGallery() {
-        const modal = document.getElementById('gallery-modal');
-        modal.style.display = 'flex';
+        document.getElementById('gallery-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
         if (!swiper) {
             swiper = new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", type: "fraction" }, grabCursor: true });
         }
     }
-    function closeGallery() { 
-        document.getElementById('gallery-modal').style.display = 'none'; 
-        document.body.style.overflow = 'auto'; 
-    }
-    // 바깥 어두운 영역 클릭 시 닫기
-    function closeGalleryByOutside(e) {
-        if (e.target.id === 'gallery-modal') closeGallery();
-    }
+    function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
 
     let lastX = 0, lastY = 0;
     document.addEventListener('click', e => {
-        if (e.target.closest('.gallery-content')) return; // 팝업 내부는 클릭 무시
+        if (e.target.closest('.gallery-content')) return;
         if (e.target.classList.contains('floating-heart')) { e.target.remove(); } 
         else { createHeart(e.pageX, e.pageY); }
     });
