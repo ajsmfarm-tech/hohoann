@@ -2,13 +2,16 @@
 <html lang="ko">
 <head>
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png"> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>우리 결혼합니다</title>
+    <title>눌러 앉기로 했습니다</title>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ajsmfarm-tech.github.io/hohoann/">
-    <meta property="og:title" content="인검 ❤️ 수현, 우리 결혼합니다"> <meta property="og:description" content="2026년 5월 9일 오후 1시, 대홍관"> <meta property="og:image" content="og_image.png">
+    <meta property="og:title" content="인검 ❤️ 수현, 우리 결혼합니다"> 
+    <meta property="og:description" content="2026년 5월 9일 오후 1시, 대홍관"> 
+    <meta property="og:image" content="og_image.png">
+    
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -34,15 +37,7 @@
             position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 인트로 로더 --- */
-        #loader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--main-purple); display: flex; justify-content: center; align-items: center;
-            z-index: 99999999; transition: opacity 0.8s ease;
-        }
-        .loader-gif { width: 100%; max-width: 400px; height: auto; display: block; }
-
-        /* --- 팝업 갤러리 (여백 제거 + 4:5 고정) --- */
+        /* --- 팝업 갤러리 --- */
         #gallery-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7); z-index: 10000000;
@@ -55,47 +50,38 @@
             animation: popup-open 0.3s ease-out;
         }
         @keyframes popup-open { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        
         .gallery-header { height: 60px; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #eee; background: #fff; flex-shrink: 0; }
         .back-btn { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; }
         .header-title { margin-left: 10px; font-weight: 600; font-size: 18px; color: #333; }
-        
         .swiper { width: 100%; height: auto; position: relative; }
         .swiper-slide { display: flex; justify-content: center; align-items: center; background: #fff; height: auto; overflow: hidden; }
-        .swiper-slide img {
-            width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block;
-        }
+        .swiper-slide img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
         .swiper-pagination-fraction {
             position: absolute !important; bottom: 20px !important; right: 20px !important;
             left: auto !important; width: auto !important; background: rgba(0, 0, 0, 0.5);
             color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; z-index: 100;
         }
 
-        /* --- 최상단 히어로 카드 --- */
+        /* --- 히어로 & 메인 이미지 --- */
         .hero-info-card { background-color: var(--main-purple); padding-top: 40px; padding-bottom: 60px; text-align: center; }
         .hero-info-card img { width: 100%; display: block; margin-bottom: 42px; }
         .figma-typography { color: #FFFFFF; font-size: 18px; font-weight: 400; line-height: 150%; letter-spacing: -0.01em; text-align: center; }
-
-        /* --- 메인 이미지 섹션 --- */
         .image-section div { margin-bottom: 68px; overflow: hidden; }
         .image-section div:last-child { margin-bottom: 0 !important; }
         .image-section img { width: 100%; display: block; }
 
-        /* --- 하단 영역 (AOS 제거 유지) --- */
+        /* --- 하단 정보 영역 --- */
         .more-btn-wrap { text-align: center; background-color: var(--info-bg); margin-top: 0; padding: 60px 0 80px; }
         .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
-
         .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
         .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
         .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
         .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; }
         .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
-        
         .sub-section { margin-bottom: 35px; }
         .sub-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
         .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
-
         .account-section { padding: 40px 21px 80px; background-color: var(--info-bg); }
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
         details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
@@ -106,25 +92,48 @@
         .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
         .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
         .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
-        
-        /* 복사 아이콘 공통 스타일 */
-        .copy-icon { 
-            width: 18px; height: auto; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; vertical-align: middle; margin-left: 4px;
-        }
+        .copy-icon { width: 18px; height: auto; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; vertical-align: middle; margin-left: 4px; }
         .copy-icon:hover { opacity: 1; }
-
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
-        /* 하트 스티커 및 토스트 */
+        /* --- 스티커 & 토글 버튼 (수정됨) --- */
         .floating-heart { position: absolute; font-size: 28px; z-index: 10000005; cursor: pointer; transition: transform 0.1s ease-out; }
+        .floating-heart.fade-out { animation: fadeOutRemove 1.5s forwards ease-in; }
+        @keyframes fadeOutRemove {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            70% { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -120%) scale(0.5); }
+        }
+
+        #sticker-toggle {
+            position: fixed; bottom: 90px; right: 20px;
+            width: 36px; height: 36px; /* 더 작게 축소 */
+            border-radius: 50%; background-color: #fff; border: 1px solid var(--main-purple);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999999;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            font-size: 11px; /* 글자 크기 더 줄임 */
+            font-weight: 800; color: var(--main-purple);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 480px) {
+            #sticker-toggle { right: calc(50% - 220px); } /* PC에서도 본문 안으로 고정 */
+        }
+        #sticker-toggle.on { background-color: var(--main-purple); color: #fff; }
+
         #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 30px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+
+        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--main-purple); display: flex; justify-content: center; align-items: center; z-index: 99999999; transition: opacity 0.8s ease; }
     </style>
 </head>
 <body>
 
-<div id="loader"><img src="opening.gif" alt="오프닝 애니메이션" class="loader-gif"></div>
+<div id="loader"><img src="opening.gif" alt="오프닝" class="loader-gif"></div>
+
+<button id="sticker-toggle" onclick="toggleStickerMode()">OFF</button>
 
 <div id="gallery-modal" onclick="closeGalleryByOutside(event)">
     <div class="gallery-content">
@@ -148,12 +157,8 @@
 <div class="container">
     <div class="hero-info-card">
         <img src="title.gif">
-        <div class="figma-typography">
-            서울 서초구 청룡마을 14 대홍관<br>
-            2026.05.09 01:00 PM
-        </div>
+        <div class="figma-typography">서울 서초구 청룡마을 14 대홍관<br>2026.05.09 01:00 PM</div>
     </div>
-
     <div class="image-section">
         <div data-aos="fade-up"><img src="01.png"></div>
         <div data-aos="fade-up"><img src="02.png"></div>
@@ -167,11 +172,9 @@
         <div data-aos="fade-up"><img src="12.png"></div>
         <div data-aos="fade-up"><img src="13.png"></div>
     </div>
-
     <div class="more-btn-wrap">
         <button class="more-btn" onclick="openGallery()">더 보기</button>
     </div>
-
     <div class="info-section">
         <div class="label-sm">오시는 길</div>
         <div class="venue-title">대홍관</div>
@@ -180,32 +183,21 @@
         </div>
         <div class="desc-sm">전용 주차장이 없어 공간이 협소할 수 있으니 가급적 대중교통 이용 부탁드립니다.</div>
         <hr>
-        <div class="sub-section">
-            <div class="sub-title">인근 주차장</div>
-            <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
-        </div>
-        <div class="sub-section">
-            <div class="sub-title">지하철</div>
-            <div class="sub-content">청계산 입구역 2번 출구</div>
-        </div>
+        <div class="sub-section"><div class="sub-title">인근 주차장</div><div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div></div>
+        <div class="sub-section"><div class="sub-title">지하철</div><div class="sub-content">청계산 입구역 2번 출구</div></div>
     </div>
-
     <div class="account-section">
         <div class="section-title">마음 전하실 곳</div>
         <details>
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">신부 박수현</div>
-                        <div class="number">농협 351-0489-9023-73</div>
-                    </div>
+                    <div class="account-info"><div class="name">신부 박수현</div><div class="number">농협 351-0489-9023-73</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')" alt="복사">
                 </div>
             </div>
         </details>
-        </div>
-    
+    </div>
     <div class="footer-logo"><img src="14.png" alt="footer logo"></div>
 </div>
 
@@ -218,10 +210,7 @@
         const loader = document.getElementById('loader');
         setTimeout(() => {
             loader.style.opacity = '0';
-            setTimeout(() => { 
-                loader.style.display = 'none'; 
-                AOS.init({ once: true, offset: 100, duration: 1500 });
-            }, 800);
+            setTimeout(() => { loader.style.display = 'none'; AOS.init({ once: true, offset: 100, duration: 1500 }); }, 800);
         }, 1500);
     });
 
@@ -230,19 +219,39 @@
         document.querySelectorAll('.floating-heart').forEach(heart => heart.remove());
         document.getElementById('gallery-modal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        if (!swiper) {
-            swiper = new Swiper(".mySwiper", { 
-                pagination: { el: ".swiper-pagination", type: "fraction" },
-                grabCursor: true 
-            });
-        }
+        if (!swiper) { swiper = new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", type: "fraction" }, grabCursor: true }); }
     }
     function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
 
+    let isStickerModeOn = false; 
+
+    function toggleStickerMode() {
+        isStickerModeOn = !isStickerModeOn;
+        const btn = document.getElementById('sticker-toggle');
+        
+        if (isStickerModeOn) {
+            btn.classList.add('on');
+            btn.innerText = 'ON'; 
+            showToastMessage("스티커가 화면에 유지됩니다.");
+        } else {
+            btn.classList.remove('on');
+            btn.innerText = 'OFF'; 
+            showToastMessage("화면의 스티커를 정리했습니다.");
+            // [수정] OFF 모드로 바꾸는 순간 모든 스티커 즉시 삭제
+            document.querySelectorAll('.floating-heart').forEach(h => h.remove());
+        }
+    }
+
+    function showToastMessage(msg) {
+        const s = document.getElementById("toast");
+        s.innerText = msg; s.className = "show";
+        setTimeout(() => s.className = "", 2500);
+    }
+
     let lastX = 0, lastY = 0;
     document.addEventListener('click', e => {
-        if (e.target.closest('.gallery-content')) return;
+        if (e.target.closest('.gallery-content') || e.target.id === 'sticker-toggle' || e.target.closest('.back-btn')) return;
         if (e.target.classList.contains('floating-heart')) { e.target.remove(); } 
         else { createHeart(e.pageX, e.pageY); }
     });
@@ -259,11 +268,16 @@
         h.style.left = x + 'px'; h.style.top = y + 'px';
         h.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
         document.body.appendChild(h);
+
+        if (!isStickerModeOn) {
+            h.classList.add('fade-out');
+            setTimeout(() => { if (h.parentNode) h.remove(); }, 1500);
+        }
     }
 
     function copyToClipboard(t) {
         const e = document.createElement('textarea'); e.value = t; document.body.appendChild(e); e.select(); document.execCommand('copy'); document.body.removeChild(e);
-        const s = document.getElementById("toast"); s.className = "show"; setTimeout(() => s.className = "", 3000);
+        showToastMessage("복사되었습니다.");
     }
 </script>
 </body>
