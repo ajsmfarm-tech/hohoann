@@ -37,15 +37,15 @@
             position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 인트로 로더: 크기 65% 최적화 --- */
+        /* --- 인트로 로더: 사용자 지정 수치 --- */
         #loader { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background-color: var(--main-purple); display: flex; justify-content: center; align-items: center; 
             z-index: 99999999; transition: opacity 0.8s ease; 
         }
-        .loader-gif { width: 65%; max-width: 280px; height: auto; display: block; }
+        .loader-gif { width: 100%; max-width: 460px; height: auto; display: block; }
 
-        /* --- 팝업 갤러리: 4:5 고정 --- */
+        /* --- 팝업 갤러리 --- */
         #gallery-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7); z-index: 10000000;
@@ -58,7 +58,7 @@
             animation: popup-open 0.3s ease-out;
         }
         @keyframes popup-open { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        .gallery-header { height: 60px; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #eee; background: #fff; flex-shrink: 0; }
+        .gallery-header { height: 58px; display: flex; align-items: center; padding: 3px 12px; border-bottom: 0px solid #eee; background: #fff; flex-shrink: 0; }
         .back-btn { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; }
         .swiper { width: 100%; height: auto; position: relative; }
         .swiper-slide { display: flex; justify-content: center; align-items: center; background: #fff; height: auto; overflow: hidden; }
@@ -76,45 +76,60 @@
         
         .image-section { background-color: var(--main-purple); }
         .image-section div { margin-bottom: 68px; overflow: hidden; }
-        /* [중요] 마지막 이미지 마진 제거하여 보라색 띠 방지 */
         .image-section div:last-child { margin-bottom: 0 !important; }
         .image-section img { width: 100%; display: block; }
 
-        /* --- 하단 정보 영역 (노란 배경 시작) --- */
+        /* --- 하단 정보 영역 --- */
         .more-btn-wrap { 
             text-align: center; background-color: var(--info-bg); 
-            padding: 60px 0 80px; margin-top: 0; /* 이미지 섹션과 바로 붙음 */
+            padding: 60px 0 28px; margin-top: 0; 
         }
         .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
 
-        .info-section { background-color: var(--info-bg); padding: 20px 24px 40px; color: var(--text-main); text-align: left; }
+        .info-section { 
+            background-color: var(--info-bg); 
+            padding: 48px 24px 40px; 
+            color: var(--text-main); 
+            text-align: left; 
+        }
         .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
-        .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
-        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; color: var(--text-main); }
-        .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
+        .venue-title { font-size: 24px; font-weight: 700; line-height: 28px; margin-bottom: 16px; color: var(--text-main); }   
+        .address-row { font-size: 18px; font-weight: 400; line-height: 28px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; color: var(--text-main); }
+        .desc-sm { font-size: 16px; font-weight: 300; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
         
         .sub-section { margin-bottom: 35px; }
-        .sub-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-        .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
+        .sub-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }     
+        .sub-content { font-size: 16px; color: var(--text-sub); line-height: 1.7; }
+        .sub-content strong { font-weight: 700; color: var(--text-main); margin-right: 4px; }
 
-        .account-section { padding: 40px 21px 80px; background-color: var(--info-bg); color: var(--text-main); }
+        .account-section { padding: 0px 21px 80px; background-color: var(--info-bg); color: var(--text-main); }
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); text-align: left; }
         details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
-        summary { padding: 15px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
-        summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
+        summary { padding: 18px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
+        summary::after { content: '▼'; font-size: 12px; transition: 0.3s; }
         details[open] summary::after { transform: rotate(180deg); }
-        .account-list { padding: 0 15px 20px; }
-        .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
-        .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
-        .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
-        
+
+        .account-list { padding: 16px 20px 10px; }
+        .account-item { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 20px; margin-bottom: 28px; }        
+        .account-info .name { font-size: 14px; font-weight: 400; color: var(--text-sub); margin-bottom: 6px; }
+        .account-info .number { font-size: 18px; font-weight: 600; color: var(--text-main); }
+        .account-item:last-child { margin-bottom: 10px; border-bottom: none; }
+
         .copy-icon { width: 18px; height: auto; cursor: pointer; opacity: 0.6; vertical-align: middle; margin-left: 4px; }
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
-        /* --- 스티커 & 토글 버튼 (수정됨: 글자 크기 축소) --- */
-        .floating-heart { position: absolute; font-size: 28px; z-index: 10000005; cursor: pointer; transition: transform 0.1s ease-out; }
+        /* --- 스티커 & 토글 버튼 --- */
+        .floating-heart { 
+            position: absolute; 
+            z-index: 10000005; 
+            cursor: pointer; 
+            transition: transform 0.1s ease-out; 
+            width: 28px; 
+            height: auto;
+            pointer-events: none; 
+        }
         .floating-heart.fade-out { animation: fadeOutRemove 1.5s forwards ease-in; }
         @keyframes fadeOutRemove {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -122,32 +137,46 @@
         }
 
         #sticker-toggle {
-            position: fixed; bottom: 90px; right: 20px;
-            width: 36px; height: 36px; border-radius: 50%; 
-            background-color: #fff; border: 1px solid var(--main-purple);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999999;
-            cursor: pointer; display: flex; justify-content: center; align-items: center;
-            font-size: 10px; /* 글자 크기 더 앙증맞게 축소 */
-            font-weight: 800; color: var(--main-purple); transition: all 0.3s;
+            position: fixed; 
+            bottom: 30px; 
+            right: 20px; 
+            width: auto; 
+            height: auto; 
+            padding: 8px 12px; 
+            border-radius: 12px; 
+            background-color: #fff; 
+            border: 1px solid var(--main-purple);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+            z-index: 999999;
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            font-size: 11px; 
+            font-weight: 800; 
+            color: var(--main-purple); 
+            transition: all 0.3s;
         }
         @media (min-width: 480px) { #sticker-toggle { right: calc(50% - 220px); } }
         #sticker-toggle.on { background-color: var(--main-purple); color: #fff; }
 
-        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 30px; transform: translateX(-50%); }
+        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 80px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from { bottom: 50px; opacity: 0; } to { bottom: 80px; opacity: 1; } }
+        @keyframes fadeout { from { bottom: 80px; opacity: 1; } to { bottom: 50px; opacity: 0; } }
     </style>
 </head>
 <body>
 
 <div id="loader"><img src="opening.gif" alt="오프닝" class="loader-gif"></div>
 
-<button id="sticker-toggle" onclick="toggleStickerMode()">OFF</button>
+<button id="sticker-toggle" onclick="toggleStickerMode()">스티커모드 OFF</button>
 
 <div id="gallery-modal" onclick="closeGalleryByOutside(event)">
     <div class="gallery-content">
         <div class="gallery-header">
             <button class="back-btn" onclick="closeGallery()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <span class="header-title" style="margin-left:10px; font-weight:600;">사진 더 보기</span>
+            <span class="header-title" style="margin-left:0px; font-weight:600;">돌아가기</span>
         </div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -183,7 +212,7 @@
     </div>
 
     <div class="more-btn-wrap">
-        <button class="more-btn" onclick="openGallery()">더 보기</button>
+        <button class="more-btn" onclick="openGallery()">사진 더 보기</button>
     </div>
 
     <div class="info-section">
@@ -199,22 +228,64 @@
             <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
         </div>
         <div class="sub-section">
-            <div class="sub-title">지하철</div>
-            <div class="sub-content">청계산 입구역 2번 출구</div>
+            <div class="sub-title">대중교통</div>
+            <div class="sub-content"><strong>지하철</strong> 신분당선 청계산 입구역 2번 출구</div>
+            <div class="sub-content"><strong>버스</strong> 청계산 입구역 2번 출구</div>
+        </div>
+        <hr>
+         <div class="sub-section">
+            <div class="sub-title">추가 안내</div>
+            <div class="sub-content">예식장 사정상 축하 화환은 정중히 사양합니다.</div>
+            <div class="sub-content">마음만 감사히 받겠습니다.</div>
         </div>
     </div>
 
     <div class="account-section">
         <div class="section-title">마음 전하실 곳</div>
+        
         <details>
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
                     <div class="account-info">
                         <div class="name">신부 박수현</div>
+                        <div class="number">국민 822402-04-312842</div>
+                    </div>
+                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('82240204312842')" alt="복사">
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="name">아버지 박창희</div>
+                        <div class="number">농협 264-02-00232</div>
+                    </div>
+                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('2640200232')" alt="복사">
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="name">어머니 김희정</div>
+                        <div class="number">농협 783-02-417174</div>
+                    </div>
+                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('78302417174')" alt="복사">
+                </div>
+            </div>
+        </details>
+
+        <details>
+            <summary>신랑측 마음 전하실 곳</summary>
+            <div class="account-list">
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="name">신랑 황인검</div>
                         <div class="number">농협 351-0489-9023-73</div>
                     </div>
-                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')" alt="복사">
+                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('3510489902373')" alt="복사">
+                </div>
+                <div class="account-item">
+                    <div class="account-info">
+                        <div class="name">어머니 김현정</div>
+                        <div class="number">국민 515501-01-028555</div>
+                    </div>
+                    <img src="copy.png" class="copy-icon" onclick="copyToClipboard('51550101028555')" alt="복사">
                 </div>
             </div>
         </details>
@@ -241,9 +312,9 @@
         isStickerModeOn = !isStickerModeOn;
         const btn = document.getElementById('sticker-toggle');
         if (isStickerModeOn) {
-            btn.classList.add('on'); btn.innerText = 'ON'; showToastMessage("스티커가 화면에 유지됩니다.");
+            btn.classList.add('on'); btn.innerText = '스티커모드 ON'; showToastMessage("스티커가 화면에 유지됩니다.");
         } else {
-            btn.classList.remove('on'); btn.innerText = 'OFF'; showToastMessage("화면의 스티커를 정리했습니다.");
+            btn.classList.remove('on'); btn.innerText = '스티커모드 OFF'; showToastMessage("화면의 스티커를 정리했습니다.");
             document.querySelectorAll('.floating-heart').forEach(h => h.remove());
         }
     }
@@ -266,18 +337,24 @@
 
     document.addEventListener('click', e => {
         if (e.target.closest('.gallery-content') || e.target.id === 'sticker-toggle' || e.target.closest('.back-btn')) return;
-        if (e.target.classList.contains('floating-heart')) { e.target.remove(); } 
-        else { createHeart(e.pageX, e.pageY); }
+        createHeart(e.pageX, e.pageY);
     });
 
+    // --- [마지막 수정] 3종 스티커 랜덤 생성 함수 ---
     function createHeart(x, y) {
-        const h = document.createElement('span');
+        const h = document.createElement('img');
         h.className = 'floating-heart';
-        const info = document.querySelector('.info-section').getBoundingClientRect();
-        h.innerHTML = (y > info.top + window.pageYOffset) ? '💚' : '💜';
-        h.style.left = x + 'px'; h.style.top = y + 'px';
+        
+        // 사용자님이 준비하신 3가지 이미지 파일명
+        const stickers = ['a_heart.png', 'a_smile.png', 'a_home.png'];
+        // 무작위로 하나 선택
+        h.src = stickers[Math.floor(Math.random() * stickers.length)];
+        
+        h.style.left = x + 'px';
+        h.style.top = y + 'px';
         h.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
         document.body.appendChild(h);
+
         if (!isStickerModeOn) {
             h.classList.add('fade-out');
             setTimeout(() => { if (h.parentNode) h.remove(); }, 1500);
