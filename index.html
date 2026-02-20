@@ -29,20 +29,23 @@
             position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 1. 인트로 로딩 --- */
+        /* --- [수정] 새로운 인트로 로딩 화면 --- */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--main-purple);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            background-color: var(--main-purple); /* 배경색 유지 */
+            display: flex; justify-content: center; align-items: center; /* 중앙 정렬 */
             z-index: 99999999; transition: opacity 0.8s ease;
         }
-        .heart-loader { width: 50px; height: 50px; background-color: #fff; transform: rotate(-45deg); animation: heart-beat 1.2s infinite; position: relative; }
-        .heart-loader::before, .heart-loader::after { content: ""; width: 50px; height: 50px; background-color: #fff; border-radius: 50%; position: absolute; }
-        .heart-loader::before { top: -25px; left: 0; }
-        .heart-loader::after { left: 25px; top: 0; }
-        @keyframes heart-beat { 0%, 100% { transform: rotate(-45deg) scale(1); } 20% { transform: rotate(-45deg) scale(1.2); } }
+        /* GIF 이미지 스타일 */
+        .loader-gif {
+            width: 100%;
+            max-width: 400px; /* 이미지_5.png의 프레임 너비 참고 */
+            height: auto;
+            display: block;
+        }
+        /* 기존 하트 로더 스타일 삭제됨 */
 
-        /* --- 2. 갤러리 팝업 모달 --- */
+        /* --- 갤러리 팝업 모달 --- */
         #gallery-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7); z-index: 10000000;
@@ -68,13 +71,13 @@
             border-radius: 20px; font-size: 13px; z-index: 10;
         }
 
-        /* --- 3. 이미지 섹션 (01-13 고정) --- */
+        /* --- 이미지 섹션 --- */
         .image-section img { width: 100%; display: block; }
         .image-section div { margin-bottom: 68px; }
         .more-btn-wrap { text-align: center; margin-bottom: 80px; }
         .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
 
-        /* --- 4. 오시는 길 (구조 복구) --- */
+        /* --- 정보 및 계좌 섹션 --- */
         .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
         .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
         .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
@@ -84,8 +87,6 @@
         .sub-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--text-main); }
         .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
-
-        /* --- 5. 마음 전하실 곳 (구조 복구) --- */
         .account-section { padding: 40px 21px 60px; background-color: var(--info-bg); }
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
         details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
@@ -98,7 +99,6 @@
         .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
         .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
         .copy-icon { cursor: pointer; opacity: 0.7; width: 20px; }
-
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
@@ -110,7 +110,9 @@
 </head>
 <body>
 
-<div id="loader"><div class="heart-loader"></div><p style="color: white; margin-top: 50px; font-weight: 500;">두근두근 준비 중...</p></div>
+<div id="loader">
+    <img src="opening.gif" alt="오프닝 애니메이션" class="loader-gif">
+</div>
 
 <div id="gallery-modal" onclick="closeGalleryByOutside(event)">
     <div class="gallery-content">
@@ -153,10 +155,8 @@
         <div class="address-row" data-aos="fade-up" onclick="copyToClipboard('서울 서초구 청룡마을길 14')">
             서울 서초구 청룡마을길 14 : 두레가든 📋
         </div>
-        <div class="desc-sm" data-aos="fade-up">전용 주차장이 없어 공간이 협소할 수 있으니<br>가급적 대중교통 이용 부탁드립니다.</div>
-        
+        <div class="desc-sm" data-aos="fade-up">전용 주차장이 없어 공간이 협소할 수 있으니 가급적 대중교통 이용 부탁드립니다.</div>
         <hr>
-
         <div class="sub-section" data-aos="fade-up">
             <div class="sub-title">인근 주차장</div>
             <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
@@ -177,7 +177,6 @@
 
     <div class="account-section">
         <div class="section-title" data-aos="fade-up">마음 전하실 곳</div>
-        
         <details data-aos="fade-up">
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
@@ -195,7 +194,6 @@
                 </div>
             </div>
         </details>
-
         <details data-aos="fade-up">
             <summary>신랑측 마음 전하실 곳</summary>
             <div class="account-list">
@@ -210,7 +208,6 @@
             </div>
         </details>
     </div>
-
     <div class="footer-logo"><img src="13.png" alt="footer logo"></div>
 </div>
 
@@ -221,13 +218,14 @@
 <script>
     window.addEventListener('load', function() {
         const loader = document.getElementById('loader');
+        // 로딩 시간 조절 (필요시 수정)
         setTimeout(() => {
             loader.style.opacity = '0';
             setTimeout(() => { 
                 loader.style.display = 'none'; 
                 AOS.init({ once: true, offset: 100, duration: 1500 });
-            }, 800);
-        }, 2500); 
+            }, 800); // 페이드 아웃 시간
+        }, 3000); // GIF 재생 시간 (3초 후 사라짐)
     });
 
     let swiper;
