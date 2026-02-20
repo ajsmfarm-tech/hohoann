@@ -162,6 +162,7 @@
         </div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="gallery_00.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_01.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_02.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_03.jpg"></div>
@@ -178,6 +179,8 @@
                 <div class="swiper-slide"><img src="gallery_14.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_15.jpg"></div>
                 <div class="swiper-slide"><img src="gallery_16.jpg"></div>
+                <div class="swiper-slide"><img src="gallery_17.jpg"></div>
+                <div class="swiper-slide"><img src="gallery_18.jpg"></div>
             </div>
             <div class="swiper-pagination"></div>
         </div>
@@ -302,11 +305,21 @@
 
     let swiper;
     function openGallery() {
-        document.querySelectorAll('.floating-heart').forEach(heart => heart.remove());
-        document.getElementById('gallery-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        if (!swiper) { swiper = new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", type: "fraction" }, grabCursor: true }); }
+    document.querySelectorAll('.floating-heart').forEach(heart => heart.remove());
+    document.getElementById('gallery-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    if (!swiper) {
+        swiper = new Swiper(".mySwiper", { 
+            pagination: { el: ".swiper-pagination", type: "fraction" },
+            grabCursor: true 
+        });
+    } else {
+        // [이 한 줄을 추가!] 사진 개수가 바뀌었을 때 스위퍼를 리셋해줍니다.
+        swiper.update(); 
+        swiper.slideTo(0, 0); // 갤러리 열 때마다 첫 장부터 보여주기
     }
+}
     function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
 
