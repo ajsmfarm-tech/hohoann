@@ -37,7 +37,7 @@
             position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 인트로 로더: 사용자 지정 수치 --- */
+        /* --- 인트로 로더: 수치 보존 --- */
         #loader { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background-color: var(--main-purple); display: flex; justify-content: center; align-items: center; 
@@ -107,7 +107,7 @@
         .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); text-align: left; }
         details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
         summary { padding: 18px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
-        summary::after { content: '▼'; font-size: 12px; transition: 0.3s; }
+        summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
         details[open] summary::after { transform: rotate(180deg); }
 
         .account-list { padding: 16px 20px 10px; }
@@ -120,15 +120,14 @@
         .footer-logo { background-color: var(--info-bg); padding: 0 0 0px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
-        /* --- 스티커 & 토글 버튼 --- */
+        /* --- 스티커 스타일 --- */
         .floating-heart { 
             position: absolute; 
             z-index: 10000005; 
             cursor: pointer; 
             transition: transform 0.1s ease-out; 
-            width: 28px; 
-            height: auto;
             pointer-events: none; 
+            height: auto; 
         }
         .floating-heart.fade-out { animation: fadeOutRemove 1.5s forwards ease-in; }
         @keyframes fadeOutRemove {
@@ -137,33 +136,18 @@
         }
 
         #sticker-toggle {
-            position: fixed; 
-            bottom: 30px; 
-            right: 20px; 
-            width: auto; 
-            height: auto; 
-            padding: 8px 12px; 
-            border-radius: 12px; 
-            background-color: #fff; 
-            border: 1px solid var(--main-purple);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
-            z-index: 999999;
-            cursor: pointer; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            font-size: 11px; 
-            font-weight: 800; 
-            color: var(--main-purple); 
-            transition: all 0.3s;
+            position: fixed; bottom: 30px; right: 20px; 
+            width: auto; height: auto; padding: 8px 12px; border-radius: 12px; 
+            background-color: #fff; border: 1px solid var(--main-purple);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999999;
+            cursor: pointer; display: flex; justify-content: center; align-items: center;
+            font-size: 11px; font-weight: 800; color: var(--main-purple); transition: all 0.3s;
         }
         @media (min-width: 480px) { #sticker-toggle { right: calc(50% - 220px); } }
         #sticker-toggle.on { background-color: var(--main-purple); color: #fff; }
 
         #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 80px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-        @keyframes fadein { from { bottom: 50px; opacity: 0; } to { bottom: 80px; opacity: 1; } }
-        @keyframes fadeout { from { bottom: 80px; opacity: 1; } to { bottom: 50px; opacity: 0; } }
     </style>
 </head>
 <body>
@@ -242,55 +226,37 @@
 
     <div class="account-section">
         <div class="section-title">마음 전하실 곳</div>
-        
         <details>
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">신부 박수현</div>
-                        <div class="number">국민 822402-04-312842</div>
-                    </div>
+                    <div class="account-info"><div class="name">신부 박수현</div><div class="number">국민 822402-04-312842</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('82240204312842')" alt="복사">
                 </div>
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">아버지 박창희</div>
-                        <div class="number">농협 264-02-00232</div>
-                    </div>
+                    <div class="account-info"><div class="name">아버지 박창희</div><div class="number">농협 264-02-00232</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('2640200232')" alt="복사">
                 </div>
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">어머니 김희정</div>
-                        <div class="number">농협 783-02-417174</div>
-                    </div>
+                    <div class="account-info"><div class="name">어머니 김희정</div><div class="number">농협 783-02-417174</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('78302417174')" alt="복사">
                 </div>
             </div>
         </details>
-
         <details>
             <summary>신랑측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">신랑 황인검</div>
-                        <div class="number">농협 351-0489-9023-73</div>
-                    </div>
+                    <div class="account-info"><div class="name">신랑 황인검</div><div class="number">농협 351-0489-9023-73</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('3510489902373')" alt="복사">
                 </div>
                 <div class="account-item">
-                    <div class="account-info">
-                        <div class="name">어머니 김현정</div>
-                        <div class="number">국민 515501-01-028555</div>
-                    </div>
+                    <div class="account-info"><div class="name">어머니 김현정</div><div class="number">국민 515501-01-028555</div></div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('51550101028555')" alt="복사">
                 </div>
             </div>
         </details>
     </div>
-    
     <div class="footer-logo"><img src="14.png" alt="footer logo"></div>
 </div>
 
@@ -335,20 +301,40 @@
     function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
 
+    // --- [복구 및 강화된 스티커 로직] ---
+    let lastX = 0, lastY = 0;
+    
+    // 클릭 이벤트
     document.addEventListener('click', e => {
         if (e.target.closest('.gallery-content') || e.target.id === 'sticker-toggle' || e.target.closest('.back-btn')) return;
         createHeart(e.pageX, e.pageY);
     });
 
-    // --- [마지막 수정] 3종 스티커 랜덤 생성 함수 ---
+    // [마우스용] 쫘라락 효과 (mousemove 이벤트 추가)
+    document.addEventListener('mousemove', e => {
+        if (Math.hypot(e.pageX - lastX, e.pageY - lastY) > 35) { 
+            createHeart(e.pageX, e.pageY); lastX = e.pageX; lastY = e.pageY; 
+        }
+    });
+
+    // [모바일용] 쫘라락 효과 (touchmove 이벤트 추가)
+    document.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        if (Math.hypot(t.pageX - lastX, t.pageY - lastY) > 35) { 
+            createHeart(t.pageX, t.pageY); lastX = t.pageX; lastY = t.pageY; 
+        }
+    }, { passive: true });
+
     function createHeart(x, y) {
         const h = document.createElement('img');
         h.className = 'floating-heart';
         
-        // 사용자님이 준비하신 3가지 이미지 파일명
         const stickers = ['a_heart.png', 'a_smile.png', 'a_home.png'];
-        // 무작위로 하나 선택
         h.src = stickers[Math.floor(Math.random() * stickers.length)];
+        
+        // [복구] 가변 크기 로직 (30px ~ 55px 랜덤)
+        const randomSize = Math.floor(Math.random() * 26) + 30;
+        h.style.width = randomSize + 'px';
         
         h.style.left = x + 'px';
         h.style.top = y + 'px';
