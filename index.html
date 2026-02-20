@@ -37,7 +37,15 @@
             position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- 팝업 갤러리 --- */
+        /* --- 인트로 로더: 크기 65% 최적화 --- */
+        #loader { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: var(--main-purple); display: flex; justify-content: center; align-items: center; 
+            z-index: 99999999; transition: opacity 0.8s ease; 
+        }
+        .loader-gif { width: 65%; max-width: 280px; height: auto; display: block; }
+
+        /* --- 팝업 갤러리: 4:5 고정 --- */
         #gallery-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.7); z-index: 10000000;
@@ -52,7 +60,6 @@
         @keyframes popup-open { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         .gallery-header { height: 60px; display: flex; align-items: center; padding: 0 20px; border-bottom: 1px solid #eee; background: #fff; flex-shrink: 0; }
         .back-btn { background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; }
-        .header-title { margin-left: 10px; font-weight: 600; font-size: 18px; color: #333; }
         .swiper { width: 100%; height: auto; position: relative; }
         .swiper-slide { display: flex; justify-content: center; align-items: center; background: #fff; height: auto; overflow: hidden; }
         .swiper-slide img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
@@ -62,28 +69,37 @@
             color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 12px; z-index: 100;
         }
 
-        /* --- 히어로 & 메인 이미지 --- */
+        /* --- 메인 콘텐츠 --- */
         .hero-info-card { background-color: var(--main-purple); padding-top: 40px; padding-bottom: 60px; text-align: center; }
         .hero-info-card img { width: 100%; display: block; margin-bottom: 42px; }
         .figma-typography { color: #FFFFFF; font-size: 18px; font-weight: 400; line-height: 150%; letter-spacing: -0.01em; text-align: center; }
+        
+        .image-section { background-color: var(--main-purple); }
         .image-section div { margin-bottom: 68px; overflow: hidden; }
+        /* [중요] 마지막 이미지 마진 제거하여 보라색 띠 방지 */
         .image-section div:last-child { margin-bottom: 0 !important; }
         .image-section img { width: 100%; display: block; }
 
-        /* --- 하단 정보 영역 --- */
-        .more-btn-wrap { text-align: center; background-color: var(--info-bg); margin-top: 0; padding: 60px 0 80px; }
+        /* --- 하단 정보 영역 (노란 배경 시작) --- */
+        .more-btn-wrap { 
+            text-align: center; background-color: var(--info-bg); 
+            padding: 60px 0 80px; margin-top: 0; /* 이미지 섹션과 바로 붙음 */
+        }
         .more-btn { width: 90%; padding: 15px; background: transparent; border: 1px solid var(--point-green); color: var(--point-green); border-radius: 8px; font-size: 16px; cursor: pointer; }
-        .info-section { background-color: var(--info-bg); padding: 80px 24px 40px; color: var(--text-main); }
+
+        .info-section { background-color: var(--info-bg); padding: 20px 24px 40px; color: var(--text-main); text-align: left; }
         .label-sm { font-size: 14px; color: var(--text-sub); margin-bottom: 8px; }
-        .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+        .venue-title { font-size: 24px; font-weight: 700; margin-bottom: 16px; color: var(--text-main); }
+        .address-row { font-size: 18px; margin-bottom: 8px; text-decoration: underline; cursor: pointer; display: flex; align-items: center; gap: 5px; color: var(--text-main); }
         .desc-sm { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 40px; }
         hr { border: 0; border-top: 1px solid rgba(90, 88, 40, 0.1); margin: 40px 0; }
+        
         .sub-section { margin-bottom: 35px; }
         .sub-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
         .sub-content { font-size: 15px; color: var(--text-sub); line-height: 1.7; }
-        .account-section { padding: 40px 21px 80px; background-color: var(--info-bg); }
-        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); }
+
+        .account-section { padding: 40px 21px 80px; background-color: var(--info-bg); color: var(--text-main); }
+        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; color: var(--text-main); text-align: left; }
         details { border: 1.05px solid var(--line-green); border-radius: 8.42px; margin-bottom: 15px; background: var(--info-bg); overflow: hidden; }
         summary { padding: 15px; font-size: 16px; color: var(--line-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-weight: 500; }
         summary::after { content: '▲'; font-size: 12px; transition: 0.3s; }
@@ -92,41 +108,33 @@
         .account-item { margin-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(90, 88, 40, 0.05); padding-bottom: 15px; }
         .account-info .name { font-size: 14px; color: var(--text-sub); margin-bottom: 4px; }
         .account-info .number { font-size: 18px; font-weight: 500; color: var(--text-main); }
-        .copy-icon { width: 18px; height: auto; cursor: pointer; opacity: 0.6; transition: opacity 0.2s; vertical-align: middle; margin-left: 4px; }
-        .copy-icon:hover { opacity: 1; }
+        
+        .copy-icon { width: 18px; height: auto; cursor: pointer; opacity: 0.6; vertical-align: middle; margin-left: 4px; }
         .footer-logo { background-color: var(--info-bg); padding: 0 0 100px; text-align: center; }
         .footer-logo img { width: 100%; max-width: 480px; }
 
-        /* --- 스티커 & 토글 버튼 (수정됨) --- */
+        /* --- 스티커 & 토글 버튼 (수정됨: 글자 크기 축소) --- */
         .floating-heart { position: absolute; font-size: 28px; z-index: 10000005; cursor: pointer; transition: transform 0.1s ease-out; }
         .floating-heart.fade-out { animation: fadeOutRemove 1.5s forwards ease-in; }
         @keyframes fadeOutRemove {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            70% { opacity: 1; }
             100% { opacity: 0; transform: translate(-50%, -120%) scale(0.5); }
         }
 
         #sticker-toggle {
             position: fixed; bottom: 90px; right: 20px;
-            width: 36px; height: 36px; /* 더 작게 축소 */
-            border-radius: 50%; background-color: #fff; border: 1px solid var(--main-purple);
+            width: 36px; height: 36px; border-radius: 50%; 
+            background-color: #fff; border: 1px solid var(--main-purple);
             box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 999999;
             cursor: pointer; display: flex; justify-content: center; align-items: center;
-            font-size: 11px; /* 글자 크기 더 줄임 */
-            font-weight: 800; color: var(--main-purple);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 10px; /* 글자 크기 더 앙증맞게 축소 */
+            font-weight: 800; color: var(--main-purple); transition: all 0.3s;
         }
-        @media (min-width: 480px) {
-            #sticker-toggle { right: calc(50% - 220px); } /* PC에서도 본문 안으로 고정 */
-        }
+        @media (min-width: 480px) { #sticker-toggle { right: calc(50% - 220px); } }
         #sticker-toggle.on { background-color: var(--main-purple); color: #fff; }
 
         #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 8px; padding: 12px; position: fixed; z-index: 10000010; left: 50%; bottom: 30px; transform: translateX(-50%); }
         #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-        @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
-        @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
-
-        #loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--main-purple); display: flex; justify-content: center; align-items: center; z-index: 99999999; transition: opacity 0.8s ease; }
     </style>
 </head>
 <body>
@@ -139,7 +147,7 @@
     <div class="gallery-content">
         <div class="gallery-header">
             <button class="back-btn" onclick="closeGallery()"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <span class="header-title">사진 더 보기</span>
+            <span class="header-title" style="margin-left:10px; font-weight:600;">사진 더 보기</span>
         </div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -159,6 +167,7 @@
         <img src="title.gif">
         <div class="figma-typography">서울 서초구 청룡마을 14 대홍관<br>2026.05.09 01:00 PM</div>
     </div>
+
     <div class="image-section">
         <div data-aos="fade-up"><img src="01.png"></div>
         <div data-aos="fade-up"><img src="02.png"></div>
@@ -172,9 +181,11 @@
         <div data-aos="fade-up"><img src="12.png"></div>
         <div data-aos="fade-up"><img src="13.png"></div>
     </div>
+
     <div class="more-btn-wrap">
         <button class="more-btn" onclick="openGallery()">더 보기</button>
     </div>
+
     <div class="info-section">
         <div class="label-sm">오시는 길</div>
         <div class="venue-title">대홍관</div>
@@ -183,21 +194,32 @@
         </div>
         <div class="desc-sm">전용 주차장이 없어 공간이 협소할 수 있으니 가급적 대중교통 이용 부탁드립니다.</div>
         <hr>
-        <div class="sub-section"><div class="sub-title">인근 주차장</div><div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div></div>
-        <div class="sub-section"><div class="sub-title">지하철</div><div class="sub-content">청계산 입구역 2번 출구</div></div>
+        <div class="sub-section">
+            <div class="sub-title">인근 주차장</div>
+            <div class="sub-content">청계산근린광장 공영주차장<br>청계산청룡 공영주차장<br>자연누리오피스텔 주차장</div>
+        </div>
+        <div class="sub-section">
+            <div class="sub-title">지하철</div>
+            <div class="sub-content">청계산 입구역 2번 출구</div>
+        </div>
     </div>
+
     <div class="account-section">
         <div class="section-title">마음 전하실 곳</div>
         <details>
             <summary>신부측 마음 전하실 곳</summary>
             <div class="account-list">
                 <div class="account-item">
-                    <div class="account-info"><div class="name">신부 박수현</div><div class="number">농협 351-0489-9023-73</div></div>
+                    <div class="account-info">
+                        <div class="name">신부 박수현</div>
+                        <div class="number">농협 351-0489-9023-73</div>
+                    </div>
                     <img src="copy.png" class="copy-icon" onclick="copyToClipboard('351-0489-9023-73')" alt="복사">
                 </div>
             </div>
         </details>
     </div>
+    
     <div class="footer-logo"><img src="14.png" alt="footer logo"></div>
 </div>
 
@@ -214,31 +236,14 @@
         }, 1500);
     });
 
-    let swiper;
-    function openGallery() {
-        document.querySelectorAll('.floating-heart').forEach(heart => heart.remove());
-        document.getElementById('gallery-modal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-        if (!swiper) { swiper = new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", type: "fraction" }, grabCursor: true }); }
-    }
-    function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
-
     let isStickerModeOn = false; 
-
     function toggleStickerMode() {
         isStickerModeOn = !isStickerModeOn;
         const btn = document.getElementById('sticker-toggle');
-        
         if (isStickerModeOn) {
-            btn.classList.add('on');
-            btn.innerText = 'ON'; 
-            showToastMessage("스티커가 화면에 유지됩니다.");
+            btn.classList.add('on'); btn.innerText = 'ON'; showToastMessage("스티커가 화면에 유지됩니다.");
         } else {
-            btn.classList.remove('on');
-            btn.innerText = 'OFF'; 
-            showToastMessage("화면의 스티커를 정리했습니다.");
-            // [수정] OFF 모드로 바꾸는 순간 모든 스티커 즉시 삭제
+            btn.classList.remove('on'); btn.innerText = 'OFF'; showToastMessage("화면의 스티커를 정리했습니다.");
             document.querySelectorAll('.floating-heart').forEach(h => h.remove());
         }
     }
@@ -249,16 +254,21 @@
         setTimeout(() => s.className = "", 2500);
     }
 
-    let lastX = 0, lastY = 0;
+    let swiper;
+    function openGallery() {
+        document.querySelectorAll('.floating-heart').forEach(heart => heart.remove());
+        document.getElementById('gallery-modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (!swiper) { swiper = new Swiper(".mySwiper", { pagination: { el: ".swiper-pagination", type: "fraction" }, grabCursor: true }); }
+    }
+    function closeGallery() { document.getElementById('gallery-modal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeGalleryByOutside(e) { if (e.target.id === 'gallery-modal') closeGallery(); }
+
     document.addEventListener('click', e => {
         if (e.target.closest('.gallery-content') || e.target.id === 'sticker-toggle' || e.target.closest('.back-btn')) return;
         if (e.target.classList.contains('floating-heart')) { e.target.remove(); } 
         else { createHeart(e.pageX, e.pageY); }
     });
-    document.addEventListener('touchmove', e => {
-        const t = e.touches[0];
-        if (Math.hypot(t.pageX - lastX, t.pageY - lastY) > 100) { createHeart(t.pageX, t.pageY); lastX = t.pageX; lastY = t.pageY; }
-    }, { passive: true });
 
     function createHeart(x, y) {
         const h = document.createElement('span');
@@ -268,7 +278,6 @@
         h.style.left = x + 'px'; h.style.top = y + 'px';
         h.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 40 - 20}deg)`;
         document.body.appendChild(h);
-
         if (!isStickerModeOn) {
             h.classList.add('fade-out');
             setTimeout(() => { if (h.parentNode) h.remove(); }, 1500);
