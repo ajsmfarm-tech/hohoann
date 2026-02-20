@@ -65,14 +65,21 @@
         }
 
         /* --- [최상단 배치] 정보 그래픽 카드 --- */
-        .hero-info-card { background-color: var(--main-purple); padding-bottom: 60px; text-align: center; }
+        /* 💡 그래픽 위 여백을 조절하려면 아래 'padding-top' 값을 변경하세요 (예: 30px, 50px 등) */
+        .hero-info-card { 
+            background-color: var(--main-purple); 
+            padding-top: 50px;    /* [NEW] 상단 그래픽 위 여백 추가 */
+            padding-bottom: 60px; /* 하단 텍스트와의 간격 */
+            text-align: center; 
+        }
+
         .hero-info-card img { width: 100%; display: block; margin-bottom: 42px; }
         
-        /* 피그마 실측 텍스트 스타일 */
+        /* 피그마 실측 텍스트 스타일 (Regular로 변경) */
         .figma-typography {
             color: #FFFFFF;
-            font-size: 18px;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 500; /* [수정] Bold(700) -> Regular(400)로 변경 */
             line-height: 150%;
             letter-spacing: -0.01em;
             text-align: center;
